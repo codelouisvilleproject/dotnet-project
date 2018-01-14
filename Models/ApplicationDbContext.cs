@@ -12,5 +12,8 @@ namespace dotnet_project.Models
         {
 
         }
+
+        //Models
+        public DbSet<User> Users { get; set; }   
     }
 }

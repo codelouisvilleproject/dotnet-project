@@ -29,6 +29,10 @@ namespace dotnet_project
             services.AddDbContext<ApplicationDbContext>(opt => opt.UseInMemoryDatabase("ApplicationDb"));
             services.AddMvc();
 
+            //Configure Database
+            var connectionString = Configuration.GetConnectionString("ApplicationContext");
+            services.AddEntityFrameworkNpgsql().AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(connectionString));
+
             //Configuring Swagger
             services.AddSwaggerGen(c =>
             {
