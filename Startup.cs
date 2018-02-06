@@ -26,12 +26,14 @@ namespace dotnet_project
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(opt => opt.UseInMemoryDatabase("ApplicationDb"));
+            //services.AddDbContext<ApplicationDbContext>(opt => opt.UseInMemoryDatabase("ApplicationDb"));
+            
+            //Configure Database
+            var connectionString = Configuration.GetConnectionString("Default");
+            services.AddEntityFrameworkNpgsql().AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(connectionString));
+
             services.AddMvc();
 
-            //Configure Database
-            var connectionString = Configuration.GetConnectionString("ApplicationContext");
-            services.AddEntityFrameworkNpgsql().AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(connectionString));
 
             //Configuring Swagger
             services.AddSwaggerGen(c =>

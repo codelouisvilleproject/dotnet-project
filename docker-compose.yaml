@@ -30,20 +30,15 @@ services:
       - ./database-schema/sql:/flyway/sql
       - ./dev/conf:/flyway/conf
       - ./dev/scripts:/flyway/scripts
-
-#  Will add dotnet project here once I know how to debug from docker.  
-#  web:
-#    build: .
-#    image: web:latest
-#    volumes:
-#      - .:/app
-#      - /app/node_modules
-#    ports:
-#      - "8080:5000"
-#    depends_on:
-#      - db
-#    links:
-#      - db
+  web:
+    build: .
+    image: web:latest
+    ports:
+      - "8080:51479"
+    depends_on:
+      - db
+    links:
+      - db
 
 volumes:
   data-volume:
