@@ -27,6 +27,7 @@ namespace dotnet_project.Controllers
         {
 
             return _context.Activities;
+
         }
 
         // GET: api/Activities/5

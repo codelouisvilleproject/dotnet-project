@@ -25,5 +25,6 @@ namespace dotnetproject.Models
         public Guid UserId { get; set; }
         public Guid ActivityTypeId { get; set; }
         public int DurationMilliseconds { get; set; }
+
     }
 }
