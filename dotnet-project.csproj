@@ -5,11 +5,7 @@
     <RootNamespace>dotnet_project</RootNamespace>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Compile Include="Models\ActivityType.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
+   <ItemGroup>
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
