@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 namespace dotnet_project.Controllers
 {
     [Produces("application/json")]
-    [Route("api/Activities")]
+    [Route("api/ActivityTypes")]
     public class ActivityTypeController : Controller
     {
         private readonly ApplicationDbContext _context;
