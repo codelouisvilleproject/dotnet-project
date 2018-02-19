@@ -21,7 +21,7 @@ namespace dotnet_project.Controllers
             _context = context;
         }
 
-        // GET: api/Activities
+        // GET: api/Activities/BlahBlahBlah
         [HttpGet]
         public IEnumerable<Activity> GetActivities()
         {
