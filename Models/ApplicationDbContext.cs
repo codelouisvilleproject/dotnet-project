@@ -16,6 +16,7 @@ namespace dotnet_project.Models
 
         //Models
         public DbSet<Activity> Activities { get; set; }   
+        public DbSet<ActivityType> ActivityTypes { get; set; }
         public DbSet<CodeLouisvilleStudent> CodeLouisvileStudents { get; set; }
     }
 }
