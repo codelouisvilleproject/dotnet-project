@@ -11,7 +11,7 @@ using dotnetproject.Models;
 namespace dotnet_project.Controllers
 {
     [Produces("application/json")]
-    [Route("api/Activities")]
+    [Route("api/Users/{UserId}/Activities")]
     public class ActivitiesController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -23,23 +23,25 @@ namespace dotnet_project.Controllers
 
         // GET: api/Activities
         [HttpGet]
-        public IEnumerable<Activity> GetActivities()
+        public IEnumerable<Activity> GetActivities(Guid UserId)
         {
+            var allActivities = _context.Activities.Where(m => m.UserId == UserId);
 
-            return _context.Activities;
+            return allActivities;
 
         }
 
         // GET: api/Activities/5
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetActivity([FromRoute] Guid id)
+        [Route("{id}")]
+        [HttpGet]
+        public async Task<IActionResult> GetActivity(Guid UserId, [FromRoute] Guid id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var activity = await _context.Activities.SingleOrDefaultAsync(m => m.Id == id);
+            var activity = await _context.Activities.SingleOrDefaultAsync(m => m.Id == id && m.UserId == UserId);
 
             if (activity == null)
             {
@@ -86,12 +88,14 @@ namespace dotnet_project.Controllers
 
         // POST: api/Activities
         [HttpPost]
-        public async Task<IActionResult> PostActivity([FromBody] Activity activity)
+        public async Task<IActionResult> PostActivity([FromBody] Activity activity, [FromRoute] Guid UserId)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
+
+            activity.UserId = UserId;
 
             _context.Activities.Add(activity);
             await _context.SaveChangesAsync();
@@ -101,14 +105,16 @@ namespace dotnet_project.Controllers
 
         // DELETE: api/Activities/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteActivity([FromRoute] Guid id)
+        public async Task<IActionResult> DeleteActivity([FromRoute] Guid id, [FromRoute] Guid UserId)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var activity = await _context.Activities.SingleOrDefaultAsync(m => m.Id == id);
+            
+            var activity = await _context.Activities.SingleOrDefaultAsync(m => m.Id == id && m.UserId == UserId);
+
             if (activity == null)
             {
                 return NotFound();
