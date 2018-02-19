@@ -5,7 +5,7 @@
     <RootNamespace>dotnet_project</RootNamespace>
   </PropertyGroup>
 
-   <ItemGroup>
+  <ItemGroup>
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
