@@ -26,8 +26,6 @@ namespace dotnet_project.Controllers
         /// </summary>
         /// <param name="UserId"></param>
         /// <returns></returns>
-
-
         // GET: api/Users/{UserId}/Activities
         [HttpGet]
         public IEnumerable<Activity> GetActivities(Guid UserId)
@@ -45,9 +43,6 @@ namespace dotnet_project.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         /// 
-
-         
-
         // GET: api/Users/{UserId}/Activities/5
         [Route("{id}")]
         [HttpGet]
@@ -68,7 +63,13 @@ namespace dotnet_project.Controllers
             return Ok(activity);
         }
 
-        // PUT: api/Activities/5
+        /// <summary>
+        /// Udate given Activity parameters for given UserId
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="activity"></param>
+        /// <returns></returns>
+        // PUT: api//Users/{UserId}/Activities/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutActivity([FromRoute] Guid id, [FromBody] Activity activity)
         {
@@ -103,9 +104,14 @@ namespace dotnet_project.Controllers
             return NoContent();
         }
 
-        
 
-        // POST: api/Activities
+        /// <summary>
+        /// Add new Activity to a given UserId 
+        /// </summary>
+        /// <param name="activity"></param>
+        /// <param name="UserId"></param>
+        /// <returns></returns>
+        // POST: api/Users/{UserId}/Activities/5
         [HttpPost]
         public async Task<IActionResult> PostActivity([FromBody] Activity activity, [FromRoute] Guid UserId)
         {
