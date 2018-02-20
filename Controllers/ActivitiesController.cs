@@ -21,7 +21,14 @@ namespace dotnet_project.Controllers
             _context = context;
         }
 
-        // GET: api/Activities
+        /// <summary>
+        /// GetActivities returns a list of activities for a given UserId
+        /// </summary>
+        /// <param name="UserId"></param>
+        /// <returns></returns>
+
+
+        // GET: api/Users/{UserId}/Activities
         [HttpGet]
         public IEnumerable<Activity> GetActivities(Guid UserId)
         {
@@ -31,7 +38,17 @@ namespace dotnet_project.Controllers
 
         }
 
-        // GET: api/Activities/5
+        /// <summary>
+        /// GetActivity returns a given activity for a giver UserId
+        /// </summary>
+        /// <param name="UserId"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        /// 
+
+         
+
+        // GET: api/Users/{UserId}/Activities/5
         [Route("{id}")]
         [HttpGet]
         public async Task<IActionResult> GetActivity(Guid UserId, [FromRoute] Guid id)
@@ -85,6 +102,8 @@ namespace dotnet_project.Controllers
 
             return NoContent();
         }
+
+        
 
         // POST: api/Activities
         [HttpPost]
