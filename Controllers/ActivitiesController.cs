@@ -37,7 +37,7 @@ namespace dotnet_project.Controllers
         }
 
         /// <summary>
-        /// GetActivity returns a given activity for a giver UserId
+        /// GetActivity returns a given activity for a given UserId
         /// </summary>
         /// <param name="UserId"></param>
         /// <param name="id"></param>
@@ -64,7 +64,7 @@ namespace dotnet_project.Controllers
         }
 
         /// <summary>
-        /// Udate given Activity parameters for given UserId
+        /// Update given Activity parameters for given UserId
         /// </summary>
         /// <param name="id"></param>
         /// <param name="activity"></param>
@@ -128,7 +128,13 @@ namespace dotnet_project.Controllers
             return CreatedAtAction("GetActivity", new { id = activity.Id }, activity);
         }
 
-        // DELETE: api/Activities/5
+        /// <summary>
+        /// Delete a given activity for a given UserId
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="UserId"></param>
+        /// <returns></returns>
+        // DELETE: apiUsers/{UserId}/Activities/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteActivity([FromRoute] Guid id, [FromRoute] Guid UserId)
         {
