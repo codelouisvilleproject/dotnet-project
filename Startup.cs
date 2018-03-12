@@ -33,7 +33,7 @@ namespace dotnet_project
             var connectionString = Configuration.GetConnectionString("ApplicationContext");
             //services.AddEntityFrameworkNpgsql().AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(connectionString));
             services.AddDbContext<ApplicationDbContext>(opt => opt.UseInMemoryDatabase("ApplicationDb"));
-
+            
 
             services.AddMvc();
 

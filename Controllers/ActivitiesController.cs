@@ -10,6 +10,7 @@ using dotnetproject.Models;
 
 namespace dotnet_project.Controllers
 {
+   
     [Produces("application/json")]
     [Route("api/Users/{UserId}/Activities")]
     public class ActivitiesController : Controller
@@ -22,8 +23,9 @@ namespace dotnet_project.Controllers
         }
 
         // GET: api/Activities
+        [AuthorizationUser]
         [HttpGet]
-        public IEnumerable<Activity> GetActivities(Guid UserId)
+        public IEnumerable<Activity> GetActivities(int UserId)
         {
             var allActivities = _context.Activities.Where(m => m.UserId == UserId);
 
@@ -34,7 +36,7 @@ namespace dotnet_project.Controllers
         // GET: api/Activities/5
         [Route("{id}")]
         [HttpGet]
-        public async Task<IActionResult> GetActivity(Guid UserId, [FromRoute] Guid id)
+        public async Task<IActionResult> GetActivity(int UserId, [FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
@@ -53,7 +55,7 @@ namespace dotnet_project.Controllers
 
         // PUT: api/Activities/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutActivity([FromRoute] Guid id, [FromBody] Activity activity)
+        public async Task<IActionResult> PutActivity([FromRoute] int id, [FromBody] Activity activity)
         {
             if (!ModelState.IsValid)
             {
@@ -88,7 +90,7 @@ namespace dotnet_project.Controllers
 
         // POST: api/Activities
         [HttpPost]
-        public async Task<IActionResult> PostActivity([FromBody] Activity activity, [FromRoute] Guid UserId)
+        public async Task<IActionResult> PostActivity([FromBody] Activity activity, [FromRoute] int UserId)
         {
             if (!ModelState.IsValid)
             {
@@ -105,7 +107,7 @@ namespace dotnet_project.Controllers
 
         // DELETE: api/Activities/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteActivity([FromRoute] Guid id, [FromRoute] Guid UserId)
+        public async Task<IActionResult> DeleteActivity([FromRoute] int id, [FromRoute] int UserId)
         {
             if (!ModelState.IsValid)
             {
@@ -126,7 +128,7 @@ namespace dotnet_project.Controllers
             return Ok(activity);
         }
 
-        private bool ActivityExists(Guid id)
+        private bool ActivityExists(int id)
         {
             return _context.Activities.Any(e => e.Id == id);
         }
