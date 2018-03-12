@@ -20,6 +20,10 @@ namespace dotnet_project.Controllers
             _context = context;
         }
 
+        /// <summary>
+        /// Returns list of Activity Types
+        /// </summary>
+        /// <returns></returns>
         // GET: api/Activities
         [HttpGet]
         public IEnumerable<ActivityType> GetActivityType()
@@ -29,6 +33,11 @@ namespace dotnet_project.Controllers
 
         }
 
+        /// <summary>
+        /// Returns specific Activity Type given Activity Type Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         // GET: api/Activities/5
         [HttpGet("{id}")]
         public async Task<IActionResult> GetActivityType([FromRoute] Guid id)

@@ -11,6 +11,7 @@ using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.Swagger;
 using Microsoft.EntityFrameworkCore;
 using dotnet_project.Models;
+using System.IO;
 
 namespace dotnet_project
 {
@@ -42,6 +43,9 @@ namespace dotnet_project
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info { Title = "Fitness API", Version = "v1" });
+                var basePath = AppContext.BaseDirectory;
+                var xmlPath = Path.Combine(basePath, "dotnet-project.xml");
+                c.IncludeXmlComments(xmlPath);
             });
         }
 
