@@ -9,6 +9,7 @@ namespace dotnet_project.Models
 {
     public class AuthToken
     {
+
         [Key]
         [Column("token")]
         public string Token { get; set; }

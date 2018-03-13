@@ -17,9 +17,9 @@ namespace dotnet_project.Models
         {
             String headerToken = context.HttpContext.Request.Headers["Authorization"];
             ApplicationDbContext dbToken = context.HttpContext.RequestServices.GetService(typeof(ApplicationDbContext)) as ApplicationDbContext;
-            //Need to get rid of Bearer Type 
+            //Need to get rid of Bearer Type  
 
-            if (dbToken.AuthTokens.Any( token => token.Token == headerToken))
+            if (dbToken.AuthTokens.Any(token => token.Token == headerToken))
             {
                 context.Result = new AcceptedResult();
             }
@@ -28,8 +28,8 @@ namespace dotnet_project.Models
                 context.Result = new UnauthorizedResult();
             }
 
-            //ApplicationDbContext dbContext = context.HttpContext.RequestServices.GetService(typeof(ApplicationDbContext)) as ApplicationDbContext;
-            //dbContext.Activities.Add(new Activity(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid(), 60));
+            //ApplicationDbContext dbContext = context.HttpContext.RequestServices.GetService(typeof(ApplicationDbContext)) as ApplicationDbContext; 
+            //dbContext.Activities.Add(new Activity(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid(), 60)); 
         }
     }
 
@@ -37,7 +37,7 @@ namespace dotnet_project.Models
     {
         public AuthorizationUserAttribute() : base(typeof(AuthorizeUserFilter))
         {
-             
+
         }
     }
 }

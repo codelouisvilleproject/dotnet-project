@@ -31,7 +31,7 @@ namespace dotnet_project.Controllers
 
         // GET: api/Activities/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetActivityType([FromRoute] Guid id)
+        public async Task<IActionResult> GetActivityType([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {

@@ -10,7 +10,6 @@ using dotnetproject.Models;
 
 namespace dotnet_project.Controllers
 {
-   
     [Produces("application/json")]
     [Route("api/Users/{UserId}/Activities")]
     public class ActivitiesController : Controller
@@ -23,7 +22,6 @@ namespace dotnet_project.Controllers
         }
 
         // GET: api/Activities
-        [AuthorizationUser]
         [HttpGet]
         public IEnumerable<Activity> GetActivities(int UserId)
         {
