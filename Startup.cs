@@ -17,8 +17,11 @@ namespace dotnet_project
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        private IHostingEnvironment CurrentEnvironment { get; set; }
+
+        public Startup(IConfiguration configuration, IHostingEnvironment env)
         {
+            CurrentEnvironment = env;
             Configuration = configuration;
         }
 
@@ -27,17 +30,19 @@ namespace dotnet_project
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            
-
             //Configure Database
+            if (CurrentEnvironment.IsProduction())
+            {
+                var connectionString = Environment.GetEnvironmentVariable("DATABASE_URL") ?? Configuration.GetConnectionString("ApplicationContext");
+                Console.WriteLine(connectionString);
+                services.AddEntityFrameworkNpgsql().AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(connectionString));
+            }
+            else {
+                services.AddDbContext<ApplicationDbContext>(opt => opt.UseInMemoryDatabase("ApplicationDb"));
+            }
 
-            var connectionString = Configuration.GetConnectionString("ApplicationContext");
-            //services.AddEntityFrameworkNpgsql().AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(connectionString));
-            services.AddDbContext<ApplicationDbContext>(opt => opt.UseInMemoryDatabase("ApplicationDb"));
-
-
+            //Configure MVC
             services.AddMvc();
-
 
             //Configuring Swagger
             services.AddSwaggerGen(c =>
