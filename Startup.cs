@@ -53,8 +53,6 @@ namespace dotnet_project
                 builder["Pooling"] = pooling;
 
                 var connectionString = builder.ConnectionString;
-
-                Console.WriteLine(connectionString);
                 services.AddEntityFrameworkNpgsql().AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(connectionString));
             }
             else {
