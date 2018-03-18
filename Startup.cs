@@ -12,6 +12,7 @@ using Swashbuckle.AspNetCore.Swagger;
 using Microsoft.EntityFrameworkCore;
 using dotnet_project.Models;
 using System.IO;
+using System.Data.SqlClient;
 
 namespace dotnet_project
 {
@@ -33,7 +34,25 @@ namespace dotnet_project
             //Configure Database
             if (CurrentEnvironment.IsProduction())
             {
-                var connectionString = Environment.GetEnvironmentVariable("DATABASE_URL") ?? Configuration.GetConnectionString("ApplicationContext");
+                SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
+
+                var parsedUrl = new Uri(Environment.GetEnvironmentVariable("DATABASE_URL"));
+                var user = parsedUrl.UserInfo.Split(":")[0];
+                var password = parsedUrl.UserInfo.Split(":")[1];
+                var host = parsedUrl.Host;
+                var port = parsedUrl.Port;
+                var database = parsedUrl.Segments[1];
+                bool pooling = true;
+
+                builder["User ID"] = user;
+                builder["Password"] = password;
+                builder["Host"] = host;
+                builder["Port"] = port;
+                builder["Database"] = database;
+                builder["Pooling"] = pooling;
+
+                var connectionString = builder.ConnectionString;
+
                 Console.WriteLine(connectionString);
                 services.AddEntityFrameworkNpgsql().AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(connectionString));
             }
