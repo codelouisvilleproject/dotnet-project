@@ -13,6 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using dotnet_project.Models;
 using System.IO;
 using System.Data.SqlClient;
+using System.Data.Common;
 
 namespace dotnet_project
 {
@@ -34,7 +35,7 @@ namespace dotnet_project
             //Configure Database
             if (CurrentEnvironment.IsProduction())
             {
-                SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
+                DbConnectionStringBuilder builder = new DbConnectionStringBuilder();
 
                 var parsedUrl = new Uri(Environment.GetEnvironmentVariable("DATABASE_URL"));
                 var user = parsedUrl.UserInfo.Split(":")[0];
@@ -43,7 +44,7 @@ namespace dotnet_project
                 var port = parsedUrl.Port;
                 var database = parsedUrl.Segments[1];
                 bool pooling = true;
-
+                
                 builder["User ID"] = user;
                 builder["Password"] = password;
                 builder["Host"] = host;
