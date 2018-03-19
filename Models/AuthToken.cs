@@ -9,11 +9,21 @@ namespace dotnet_project.Models
 {
     public class AuthToken
     {
+        public AuthToken()
+        { }
+
+        public AuthToken(string token, DateTime expiration)
+        {
+            token = Token;
+            expiration = Expiration;
+        }
 
         [Key]
         [Column("token")]
         public string Token { get; set; }
         [Column("expiration")]
         public DateTime Expiration { get; set; }
+
     }
 }
+

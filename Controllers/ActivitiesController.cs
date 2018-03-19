@@ -21,7 +21,13 @@ namespace dotnet_project.Controllers
             _context = context;
         }
 
-        // GET: api/Activities
+
+        /// <summary>
+        /// GetActivities returns a list of activities for a given UserId
+        /// </summary>
+        /// <param name="UserId"></param>
+        /// <returns></returns>
+        // GET: api/Users/{UserId}/Activities
         [AuthorizationUser]
         [HttpGet]
         public IEnumerable<Activity> GetActivities(int UserId)
@@ -32,7 +38,14 @@ namespace dotnet_project.Controllers
 
         }
 
-        // GET: api/Activities/5
+        /// <summary>
+        /// GetActivity returns a given activity for a given UserId
+        /// </summary>
+        /// <param name="UserId"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        /// 
+        // GET: api/Users/{UserId}/Activities/5
         [Route("{id}")]
         [HttpGet]
         public async Task<IActionResult> GetActivity(int UserId, [FromRoute] int id)
@@ -52,7 +65,13 @@ namespace dotnet_project.Controllers
             return Ok(activity);
         }
 
-        // PUT: api/Activities/5
+        /// <summary>
+        /// Update given Activity parameters for given UserId
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="activity"></param>
+        /// <returns></returns>
+        // PUT: api//Users/{UserId}/Activities/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutActivity([FromRoute] int id, [FromBody] Activity activity)
         {
@@ -87,7 +106,14 @@ namespace dotnet_project.Controllers
             return NoContent();
         }
 
-        // POST: api/Activities
+
+        /// <summary>
+        /// Add new Activity to a given UserId 
+        /// </summary>
+        /// <param name="activity"></param>
+        /// <param name="UserId"></param>
+        /// <returns></returns>
+        // POST: api/Users/{UserId}/Activities/5
         [HttpPost]
         public async Task<IActionResult> PostActivity([FromBody] Activity activity, [FromRoute] int UserId)
         {
@@ -104,7 +130,13 @@ namespace dotnet_project.Controllers
             return CreatedAtAction("GetActivity", new { id = activity.Id }, activity);
         }
 
-        // DELETE: api/Activities/5
+        /// <summary>
+        /// Delete a given activity for a given UserId
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="UserId"></param>
+        /// <returns></returns>
+        // DELETE: apiUsers/{UserId}/Activities/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteActivity([FromRoute] int id, [FromRoute] int UserId)
         {
