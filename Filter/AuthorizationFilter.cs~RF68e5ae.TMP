@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace dotnet_project.Models
+namespace dotnet_project.Filter
 {
-    public class ActivityModel
+    public class AuthorizationFilter
     {
-
     }
 }

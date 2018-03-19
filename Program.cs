@@ -20,6 +20,7 @@ namespace dotnet_project
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
+                .PreferHostingUrls(true)
                 .Build();
     }
 }

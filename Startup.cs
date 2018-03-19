@@ -12,13 +12,18 @@ using Swashbuckle.AspNetCore.Swagger;
 using Microsoft.EntityFrameworkCore;
 using dotnet_project.Models;
 using System.IO;
+using System.Data.SqlClient;
+using System.Data.Common;
 
 namespace dotnet_project
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        private IHostingEnvironment CurrentEnvironment { get; set; }
+
+        public Startup(IConfiguration configuration, IHostingEnvironment env)
         {
+            CurrentEnvironment = env;
             Configuration = configuration;
         }
 
@@ -27,17 +32,35 @@ namespace dotnet_project
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            
-
             //Configure Database
+            if (CurrentEnvironment.IsProduction())
+            {
+                DbConnectionStringBuilder builder = new DbConnectionStringBuilder();
 
-            var connectionString = Configuration.GetConnectionString("ApplicationContext");
-            //services.AddEntityFrameworkNpgsql().AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(connectionString));
-            services.AddDbContext<ApplicationDbContext>(opt => opt.UseInMemoryDatabase("ApplicationDb"));
+                var parsedUrl = new Uri(Environment.GetEnvironmentVariable("DATABASE_URL"));
+                var user = parsedUrl.UserInfo.Split(":")[0];
+                var password = parsedUrl.UserInfo.Split(":")[1];
+                var host = parsedUrl.Host;
+                var port = parsedUrl.Port;
+                var database = parsedUrl.Segments[1];
+                bool pooling = true;
+                
+                builder["User ID"] = user;
+                builder["Password"] = password;
+                builder["Host"] = host;
+                builder["Port"] = port;
+                builder["Database"] = database;
+                builder["Pooling"] = pooling;
 
+                var connectionString = builder.ConnectionString;
+                services.AddEntityFrameworkNpgsql().AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(connectionString));
+            }
+            else {
+                services.AddDbContext<ApplicationDbContext>(opt => opt.UseInMemoryDatabase("ApplicationDb"));
+            }
 
+            //Configure MVC
             services.AddMvc();
-
 
             //Configuring Swagger
             services.AddSwaggerGen(c =>
