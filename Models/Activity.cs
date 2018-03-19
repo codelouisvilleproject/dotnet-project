@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -21,9 +22,13 @@ namespace dotnetproject.Models
         }
 
         [Key]
+        [Column("id")]
         public int Id { get; set; }
+        [Column("userid")]
         public int UserId { get; set; }
+        [Column("activitytypeid")]
         public int ActivityTypeId { get; set; }
+        [Column("durationmilliseconds")]
         public int DurationMilliseconds { get; set; }
 
     }

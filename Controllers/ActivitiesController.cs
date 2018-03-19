@@ -22,6 +22,7 @@ namespace dotnet_project.Controllers
         }
 
         // GET: api/Activities
+        [AuthorizationUser]
         [HttpGet]
         public IEnumerable<Activity> GetActivities(int UserId)
         {

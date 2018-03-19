@@ -15,11 +15,10 @@ namespace dotnet_project.Models
 
         public void OnAuthorization(AuthorizationFilterContext context)
         {
-            String headerToken = context.HttpContext.Request.Headers["Authorization"];
-            ApplicationDbContext dbToken = context.HttpContext.RequestServices.GetService(typeof(ApplicationDbContext)) as ApplicationDbContext;
-            //Need to get rid of Bearer Type  
-
-            if (dbToken.AuthTokens.Any(token => token.Token == headerToken))
+            String headerToken = context.HttpContext.Request.Headers["Authorization"].ToString().Replace("Bearer ","");
+            ApplicationDbContext dbContext = context.HttpContext.RequestServices.GetService(typeof(ApplicationDbContext)) as ApplicationDbContext;
+                       
+            if (dbContext.AuthTokens.Any(x => x.Token == headerToken))
             {
                 context.Result = new AcceptedResult();
             }
@@ -28,8 +27,6 @@ namespace dotnet_project.Models
                 context.Result = new UnauthorizedResult();
             }
 
-            //ApplicationDbContext dbContext = context.HttpContext.RequestServices.GetService(typeof(ApplicationDbContext)) as ApplicationDbContext; 
-            //dbContext.Activities.Add(new Activity(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid(), 60)); 
         }
     }
 
