@@ -1,4 +1,4 @@
-﻿using System;
+﻿ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -36,15 +36,15 @@ namespace dotnet_project.Controllers
 
         }
 
-        /// <summary>
-        /// GetActivity returns a given activity for a given UserId
-        /// </summary>
-        /// <param name="UserId"></param>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        /// 
-        // GET: api/Users/{UserId}/Activities/5
-        [Route("{id}")]
+    /// <summary>
+    /// GetActivity returns a given activity for a given UserId
+    /// </summary>
+    /// <param name="UserId"></param>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    /// 
+    // GET: api/Users/{UserId}/Activities/5
+    [Route("{id}")]
         [HttpGet]
         public async Task<IActionResult> GetActivity(Guid UserId, [FromRoute] Guid id)
         {
