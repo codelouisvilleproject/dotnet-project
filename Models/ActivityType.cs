@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace dotnet_project.Models
 {
-
+    [Table("activitytypes")]
     public class ActivityType
     { 
         [Key]

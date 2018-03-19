@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace dotnetproject.Models
 {
+    [Table("activites")]
     public class Activity
     {
         public Activity()

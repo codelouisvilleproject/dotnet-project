@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace dotnet_project.Models
 {
+    [Table("authtokens")]
     public class AuthToken
     {
 
@@ -15,5 +16,7 @@ namespace dotnet_project.Models
         public string Token { get; set; }
         [Column("expiration")]
         public DateTime Expiration { get; set; }
+        [Column("user_id")]
+        public int UserId { get; set; }
     }
 }
