@@ -10,6 +10,14 @@ namespace dotnet_project.Models
     [Table("authtokens")]
     public class AuthToken
     {
+        public AuthToken()
+        { }
+
+        public AuthToken(string token, DateTime expiration)
+        {
+            token = Token;
+            expiration = Expiration;
+        }
 
         [Key]
         [Column("token")]
@@ -20,3 +28,4 @@ namespace dotnet_project.Models
         public int UserId { get; set; }
     }
 }
+
