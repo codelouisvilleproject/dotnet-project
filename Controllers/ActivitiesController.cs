@@ -28,7 +28,7 @@ namespace dotnet_project.Controllers
         /// <param name="UserId"></param>
         /// <returns></returns>
         // GET: api/Users/{UserId}/Activities
-        [AuthorizationUser]
+        //[AuthorizationUser]
         [HttpGet]
         public IEnumerable<Activity> GetActivities(int UserId)
         {
