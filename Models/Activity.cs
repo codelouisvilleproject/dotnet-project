@@ -5,6 +5,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
+using dotnet_project.Models;
+
 namespace dotnetproject.Models
 {
     [Table("activities")]
@@ -14,11 +16,11 @@ namespace dotnetproject.Models
         {
         }
 
-        public Activity(int id, int userid, int activitytypeid, int durationmilliseconds)
+        public Activity(int id, int userid, ActivityType activityType, int durationmilliseconds)
         {
             id = Id;
             userid = UserId;
-            activitytypeid = ActivityTypeId;
+            activityType = activityType;
             durationmilliseconds = DurationMilliseconds;
         }
 
@@ -27,8 +29,8 @@ namespace dotnetproject.Models
         public int Id { get; set; }
         [Column("userid")]
         public int UserId { get; set; }
-        [Column("activitytypeid")]
-        public int ActivityTypeId { get; set; }
+        [ForeignKey("activitytypeid")]
+        public ActivityType ActivityType { get; set; }
         [Column("durationmilliseconds")]
         public int DurationMilliseconds { get; set; }
 
