@@ -32,7 +32,7 @@ namespace dotnet_project.Controllers
         [HttpGet]
         public IEnumerable<Activity> GetActivities(int UserId)
         {
-            var allActivities = _context.Activities.Where(m => m.UserId == UserId);
+            var allActivities = _context.Activities.Include("ActivityType").Where(m => m.UserId == UserId);
 
             return allActivities;
 
