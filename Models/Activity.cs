@@ -27,8 +27,8 @@ namespace dotnetproject.Models
         public int Id { get; set; }
         [Column("userid")]
         public int UserId { get; set; }
-        [Column("activitytypeid")]
-        public int ActivityTypeId { get; set; }
+        [ForeignKey("activitytypeid")]
+        public ActivityType ActivityType { get; set; }
         [Column("durationmilliseconds")]
         public int DurationMilliseconds { get; set; }
 
